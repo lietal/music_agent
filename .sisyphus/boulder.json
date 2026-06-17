@@ -1,0 +1,26 @@
+{
+  "active_plan": "/Users/as/code/music_searchrecom_agent/.sisyphus/plans/music-agent.md",
+  "started_at": "2026-06-17T14:14:30.625Z",
+  "session_ids": [
+    "ses_12b5937fdffeLojd6lNv7JvqZ8",
+    "ses_12a019ed5ffeGZb4c9wFs20fUs",
+    "ses_12a017d13ffejd3Id5AsJdYkGi"
+  ],
+  "session_origins": {
+    "ses_12b5937fdffeLojd6lNv7JvqZ8": "direct",
+    "ses_12a019ed5ffeGZb4c9wFs20fUs": "appended",
+    "ses_12a017d13ffejd3Id5AsJdYkGi": "appended"
+  },
+  "plan_name": "music-agent",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "项目骨架（go.mod + chi + Docker Compose + Makefile）",
+      "session_id": "ses_12a017d13ffejd3Id5AsJdYkGi",
+      "agent": "build",
+      "updated_at": "2026-06-17T14:31:27.327Z"
+    }
+  }
+}
