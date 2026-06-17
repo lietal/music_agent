@@ -5,6 +5,9 @@ port = 8080
 [database]
 url = "postgres://music_agent:music_agent@localhost:5432/music_agent?sslmode=disable"
 
+[auth]
+jwt_secret = "dev-secret-change-in-production"
+
 [auth.wechat]
 app_id = ""
 app_secret = ""

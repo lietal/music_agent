@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: music-agent-db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: music_agent
       POSTGRES_USER: music_agent
@@ -21,16 +22,27 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: music-agent-backend
+    restart: unless-stopped
     ports:
       - "127.0.0.1:8080:8080"
+    env_file:
+      - .env
     environment:
       DATABASE_URL: postgres://music_agent:${DB_PASSWORD:-music_agent}@postgres:5432/music_agent?sslmode=disable
       LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
       WECHAT_APP_ID: ${WECHAT_APP_ID:-}
       WECHAT_APP_SECRET: ${WECHAT_APP_SECRET:-}
+      JWT_SECRET: ${JWT_SECRET:-}
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
 volumes:
   pgdata:
