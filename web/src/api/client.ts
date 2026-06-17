@@ -3,6 +3,7 @@ export interface Conversation {
   title?: string
   createdAt?: string
   updatedAt?: string
+  messages?: unknown[]
 }
 
 const API_BASE = ''
@@ -39,7 +40,7 @@ export const api = {
   },
   chat: {
     send: (message: string, conversationId?: string) =>
-      request<{ runId: string }>('/api/chat', {
+      request<{ runId: string; conversationId?: string }>('/api/chat', {
         method: 'POST',
         body: JSON.stringify({ message, conversationId }),
       }),
