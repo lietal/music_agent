@@ -1,13 +1,21 @@
 import { useCallback, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { getToken, setToken, clearToken } from '../api/client'
+import { getToken, setToken, clearToken, api } from '../api/client'
 
 export function useAuth() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const login = useCallback(() => {
-    window.location.href = '/api/auth/wechat'
+  const login = useCallback(async (username: string, password: string) => {
+    const result = await api.auth.login(username, password)
+    setToken(result.token)
+    return result.user
+  }, [])
+
+  const register = useCallback(async (username: string, password: string, displayName?: string) => {
+    const result = await api.auth.register(username, password, displayName)
+    setToken(result.token)
+    return result.user
   }, [])
 
   const logout = useCallback(() => {
@@ -49,5 +57,5 @@ export function useAuth() {
     }
   }, [location.pathname, navigate, isAuthenticated])
 
-  return { login, logout, getToken, setToken, isAuthenticated }
+  return { login, register, logout, getToken, setToken, isAuthenticated }
 }

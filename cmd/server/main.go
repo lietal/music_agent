@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/music-agent/music-agent/internal/api"
-	"github.com/music-agent/music-agent/internal/auth"
+	"github.com/music-agent/music-agent/internal/db"
 	"github.com/music-agent/music-agent/internal/event"
 )
 
@@ -22,20 +22,26 @@ func main() {
 		jwtSecret = []byte("dev-secret-change-in-production")
 	}
 
-	var provider auth.OAuthProvider
-	if appID := os.Getenv("WECHAT_APP_ID"); appID != "" {
-		provider = auth.NewWeChatProvider(
-			appID,
-			os.Getenv("WECHAT_APP_SECRET"),
-			os.Getenv("WECHAT_REDIRECT_URI"),
-		)
-	} else {
-		provider = auth.NewMockProvider()
-		logger.Info("using mock auth provider (no WECHAT_APP_ID set)")
+	databaseURL := os.Getenv("DATABASE_URL")
+	if databaseURL == "" {
+		databaseURL = "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent?sslmode=disable"
+	}
+
+	ctx := context.Background()
+	pool, err := db.NewPool(ctx, databaseURL, db.DefaultPoolConfig())
+	if err != nil {
+		logger.Error("failed to create database pool", "error", err)
+		os.Exit(1)
+	}
+	defer pool.Close()
+
+	if err := db.RunMigrations(ctx, databaseURL); err != nil {
+		logger.Error("failed to run migrations", "error", err)
+		os.Exit(1)
 	}
 
 	bus := event.NewBus()
-	handler := api.NewHandler(bus, jwtSecret, provider)
+	handler := api.NewHandler(bus, jwtSecret, pool)
 	r := api.NewRouter(handler)
 
 	srv := &http.Server{

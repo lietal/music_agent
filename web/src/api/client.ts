@@ -37,6 +37,22 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   auth: {
     me: () => request<{ id: string; displayName: string; provider?: string }>('/api/auth/me'),
+    login: (username: string, password: string) =>
+      request<{ token: string; user: { user_id: string; display_name: string } }>(
+        '/api/auth/login',
+        {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+        },
+      ),
+    register: (username: string, password: string, displayName?: string) =>
+      request<{ token: string; user: { user_id: string; display_name: string } }>(
+        '/api/auth/register',
+        {
+          method: 'POST',
+          body: JSON.stringify({ username, password, displayName }),
+        },
+      ),
   },
   chat: {
     send: (message: string, conversationId?: string) =>
