@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"log/slog"
 	"net/http"
 	"os"
@@ -10,23 +9,34 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"github.com/music-agent/music-agent/internal/api"
+	"github.com/music-agent/music-agent/internal/auth"
+	"github.com/music-agent/music-agent/internal/event"
 )
 
 func main() {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
-	r.Use(middleware.RequestID)
-	r.Use(middleware.RealIP)
+	jwtSecret := []byte(os.Getenv("JWT_SECRET"))
+	if len(jwtSecret) == 0 {
+		jwtSecret = []byte("dev-secret-change-in-production")
+	}
 
-	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
-	})
+	var provider auth.OAuthProvider
+	if appID := os.Getenv("WECHAT_APP_ID"); appID != "" {
+		provider = auth.NewWeChatProvider(
+			appID,
+			os.Getenv("WECHAT_APP_SECRET"),
+			os.Getenv("WECHAT_REDIRECT_URI"),
+		)
+	} else {
+		provider = auth.NewMockProvider()
+		logger.Info("using mock auth provider (no WECHAT_APP_ID set)")
+	}
+
+	bus := event.NewBus()
+	handler := api.NewHandler(bus, jwtSecret, provider)
+	r := api.NewRouter(handler)
 
 	srv := &http.Server{
 		Addr:         ":8080",
