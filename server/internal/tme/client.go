@@ -39,6 +39,10 @@ func (c *Client) SetCredential(musicid, musickey string) {
 	c.comm.Authst = musickey
 }
 
+func (c *Client) SetBaseURL(url string) {
+	c.baseURL = url
+}
+
 func (c *Client) Call(ctx context.Context, reqs map[string]MusicuSubRequest) (*MusicuResponse, error) {
 	full := map[string]any{
 		"comm": c.comm,
