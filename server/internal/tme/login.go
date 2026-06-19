@@ -286,7 +286,7 @@ func (c *Client) authorize(ctx context.Context, client *http.Client, session *lo
 	}
 
 	req, err := http.NewRequestWithContext(ctx, "POST",
-		"https://graph.qq.com/oauth2.0/authorize",
+		c.graphURL()+"/oauth2.0/authorize",
 		strings.NewReader(form.Encode()))
 	if err != nil {
 		return "", fmt.Errorf("create authorize request: %w", err)
@@ -335,7 +335,7 @@ func (c *Client) exchangeCredential(ctx context.Context, client *http.Client, se
 	}
 
 	body, _ := json.Marshal(payload)
-	req, err := http.NewRequestWithContext(ctx, "POST", defaultBaseURL, strings.NewReader(string(body)))
+	req, err := http.NewRequestWithContext(ctx, "POST", c.baseURL, strings.NewReader(string(body)))
 	if err != nil {
 		return nil, fmt.Errorf("create credential request: %w", err)
 	}
