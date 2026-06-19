@@ -1,0 +1,36 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /chat
+      - img [ref=e6]
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /history
+      - img [ref=e9]
+    - link [ref=e13] [cursor=pointer]:
+      - /url: /settings
+      - img [ref=e14]
+    - button [ref=e18]:
+      - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e46]:
+          - paragraph [ref=e50]: 周杰伦歌曲
+          - paragraph [ref=e54]: 当然！为你找到了一些周杰伦的经典歌曲，快来看看有没有你喜欢的吧： - **《晴天》** – 来自专辑《叶惠美》，校园回忆杀的经典，前奏一响起就是青春味道。 - **《七里香》** & **《搁浅》** – 都出自《七里香》专辑，旋律和歌词都超有画面感，听一遍就上头。 - **《稻香》** – 来自《魔杰座》，温暖治愈，总能让人想起家乡和简单快乐的日子。 - **《那天下雨了》** – 这首稍冷门但很耐听，来自专辑《太阳之子》，雨天听特别有氛围。 这几首都很推荐，随便点开一首都不会失望！如果想按心情挑，我可以再帮你推荐～ 😊
+        - generic [ref=e31]:
+          - textbox "输入你想听的音乐..." [ref=e32]
+          - button [disabled] [ref=e33]:
+            - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - heading "Trace" [level=3] [ref=e39]
+          - button [ref=e40]:
+            - img [ref=e41]
+        - generic [ref=e44]:
+          - generic [ref=e61]:
+            - img [ref=e62]
+            - generic [ref=e64]: Plan
+            - generic [ref=e65]: plan
+          - generic [ref=e67]:
+            - img [ref=e68]
+            - generic [ref=e70]: start

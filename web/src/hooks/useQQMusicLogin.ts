@@ -33,6 +33,10 @@ export function useQQMusicLogin() {
         setLoginStatus('confirmed')
         setUserName(status.user_name || null)
         qrKeyRef.current = null
+        if (status.token) {
+          localStorage.setItem('jwt', status.token)
+          window.location.href = '/chat'
+        }
       } else if (status.status === 'scanned') {
         setLoginStatus('scanned')
       } else if (status.status === 'expired') {

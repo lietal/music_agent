@@ -1,0 +1,6 @@
+[      47ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5174/node_modules/.vite/deps/react-dom_client.js?v=c0727766:14336
+[    7264ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://y.gtimg.cn/music/photo_new/T002R300x300M000/002Neh8l0uciQZ_3.jpg:0
+[    7265ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://y.gtimg.cn/music/photo_new/T002R300x300M000/0041WVfh2vtlJE_1.jpg:0
+[    7274ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://y.gtimg.cn/music/photo_new/T002R300x300M000/000MkMni19ClKG_5.jpg:0
+[    7293ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://y.gtimg.cn/music/photo_new/T002R300x300M000/003DFRzD192KKD_2.jpg:0
+[   28995ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5174/api/player/stream/qqmusic%3A0039MnYb0qxYhV:0

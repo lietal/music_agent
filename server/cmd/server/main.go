@@ -118,7 +118,7 @@ func main() {
 	}
 	playerH := api.NewPlayerHandler(tmeClient, credStore)
 	streamH := api.NewStreamHandler(tmeClient)
-	loginH := api.NewLoginHandler(tmeClient, credStore)
+	loginH := api.NewLoginHandler(tmeClient, credStore, jwtSecret, pool)
 	api.SetupPlayerRoutes(r, playerH, streamH, loginH)
 
 	srv := &http.Server{

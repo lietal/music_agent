@@ -1,0 +1,36 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /chat
+      - img [ref=e6]
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /history
+      - img [ref=e9]
+    - link [ref=e13] [cursor=pointer]:
+      - /url: /settings
+      - img [ref=e14]
+    - button [ref=e18]:
+      - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e46]:
+          - paragraph [ref=e50]: 搜索周杰伦的晴天
+          - paragraph [ref=e54]: 为你找到了周杰伦的经典歌曲《晴天》！搜索结果里包含多个版本，比如收录在专辑《叶惠美》中的原版（4分29秒），还有“地表最强”和“无与伦比”两场演唱会的现场版本，以及一些时长短一点的版本。这首歌旋律优美、歌词充满青春回忆，是非常耐听的经典。如果你想听，可以先从原版开始，再感受一下现场的氛围哦！😊
+        - generic [ref=e31]:
+          - textbox "输入你想听的音乐..." [ref=e32]
+          - button [disabled] [ref=e33]:
+            - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - heading "Trace" [level=3] [ref=e39]
+          - button [ref=e40]:
+            - img [ref=e41]
+        - generic [ref=e44]:
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e60]: Plan
+            - generic [ref=e61]: plan
+          - generic [ref=e63]:
+            - img [ref=e64]
+            - generic [ref=e66]: start

@@ -37,6 +37,8 @@ type QRStatus struct {
 	Status    string `json:"status"` // "pending" | "scanned" | "confirmed" | "expired"
 	MusicID   string `json:"music_id,omitempty"`
 	MusicKey  string `json:"music_key,omitempty"`
+	OpenID    string `json:"openid,omitempty"`
+	UnionID   string `json:"unionid,omitempty"`
 	UserName  string `json:"user_name,omitempty"`
 	AvatarURL string `json:"avatar_url,omitempty"`
 	sigx      string // internal: ptsigx from login redirect
@@ -351,10 +353,13 @@ func (c *Client) exchangeCredential(ctx context.Context, client *http.Client, se
 	}
 
 	return &QRStatus{
-		Status:   "confirmed",
-		MusicID:  fmt.Sprintf("%v", data["musicid"]),
-		MusicKey: fmt.Sprintf("%v", data["musickey"]),
-		UserName: fmt.Sprintf("%v", data["nickname"]),
+		Status:    "confirmed",
+		MusicID:   fmt.Sprintf("%v", data["musicid"]),
+		MusicKey:  fmt.Sprintf("%v", data["musickey"]),
+		OpenID:    fmt.Sprintf("%v", data["openid"]),
+		UnionID:   fmt.Sprintf("%v", data["unionid"]),
+		UserName:  fmt.Sprintf("%v", data["nickname"]),
+		AvatarURL: fmt.Sprintf("%v", data["headurl"]),
 	}, nil
 }
 

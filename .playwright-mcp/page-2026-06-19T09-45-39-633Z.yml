@@ -1,0 +1,16 @@
+- generic [ref=e4]:
+  - heading "Music Agent" [level=1] [ref=e5]
+  - paragraph [ref=e6]: 你的音乐AI助手
+  - generic [ref=e7]:
+    - textbox "用户名" [ref=e8]
+    - textbox "密码" [ref=e9]
+    - button "登录" [ref=e10]
+  - paragraph [ref=e11]:
+    - text: 没有账号？
+    - button "注册" [ref=e12]
+  - separator [ref=e13]
+  - generic [ref=e14]:
+    - heading "QQ 音乐登录" [level=2] [ref=e15]
+    - generic [ref=e17]:
+      - img "QQ 音乐登录二维码" [ref=e18]
+      - paragraph [ref=e19]: 请用QQ音乐App扫描二维码

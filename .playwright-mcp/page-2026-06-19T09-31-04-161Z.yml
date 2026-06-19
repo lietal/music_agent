@@ -1,0 +1,83 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /chat
+      - img [ref=e6]
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /history
+      - img [ref=e9]
+    - link [ref=e13] [cursor=pointer]:
+      - /url: /settings
+      - img [ref=e14]
+    - button [ref=e18]:
+      - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e46]:
+          - paragraph [ref=e50]: 周杰伦
+          - generic [ref=e53]:
+            - paragraph [ref=e54]: 为你找到了几首周杰伦的经典歌曲，风格从校园清新到治愈励志都有！ 1. **《晴天》** —— 收录于专辑《叶惠美》，前奏一响，青春回忆瞬间拉满！ 2. **《搁浅》** —— 来自神专《七里香》，伤感情歌的巅峰，唱得人心碎。 3. **《七里香》** —— 同名专辑主打歌，夏天的味道，满满的画面感。 4. **《稻香》** —— 收录于《魔杰座》，旋律轻快又治愈，让人想回到童年的田野。 你最想先听哪一首？希望这些歌能带给你好心情！
+            - generic [ref=e62]:
+              - generic [ref=e63] [cursor=pointer]:
+                - img "晴天" [ref=e64]
+                - generic [ref=e65]:
+                  - paragraph [ref=e66]: 晴天
+                  - paragraph [ref=e67]: 周杰伦
+                - button "Add to queue" [ref=e68]:
+                  - img [ref=e69]
+                - button "Play" [ref=e70]:
+                  - img [ref=e71]
+              - generic [ref=e73] [cursor=pointer]:
+                - img "搁浅" [ref=e74]
+                - generic [ref=e75]:
+                  - paragraph [ref=e76]: 搁浅
+                  - paragraph [ref=e77]: 周杰伦
+                - button "Add to queue" [ref=e78]:
+                  - img [ref=e79]
+                - button "Play" [ref=e80]:
+                  - img [ref=e81]
+              - generic [ref=e83] [cursor=pointer]:
+                - img "七里香" [ref=e84]
+                - generic [ref=e85]:
+                  - paragraph [ref=e86]: 七里香
+                  - paragraph [ref=e87]: 周杰伦
+                - button "Add to queue" [ref=e88]:
+                  - img [ref=e89]
+                - button "Play" [ref=e90]:
+                  - img [ref=e91]
+              - generic [ref=e93] [cursor=pointer]:
+                - img "那天下雨了" [ref=e94]
+                - generic [ref=e95]:
+                  - paragraph [ref=e96]: 那天下雨了
+                  - paragraph [ref=e97]: 周杰伦
+                - button "Add to queue" [ref=e98]:
+                  - img [ref=e99]
+                - button "Play" [ref=e100]:
+                  - img [ref=e101]
+              - generic [ref=e103] [cursor=pointer]:
+                - img "稻香" [ref=e104]
+                - generic [ref=e105]:
+                  - paragraph [ref=e106]: 稻香
+                  - paragraph [ref=e107]: 周杰伦
+                - button "Add to queue" [ref=e108]:
+                  - img [ref=e109]
+                - button "Play" [ref=e110]:
+                  - img [ref=e111]
+        - generic [ref=e31]:
+          - textbox "输入你想听的音乐..." [ref=e32]
+          - button [disabled] [ref=e33]:
+            - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - heading "Trace" [level=3] [ref=e39]
+          - button [ref=e40]:
+            - img [ref=e41]
+        - generic [ref=e44]:
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e60]: Plan
+            - generic [ref=e61]: plan
+          - generic [ref=e114]:
+            - img [ref=e115]
+            - generic [ref=e117]: start

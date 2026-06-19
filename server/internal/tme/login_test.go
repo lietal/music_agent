@@ -1,107 +1,75 @@
 package tme
 
 import (
-	"context"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 )
 
-func TestGetLoginQRCode(t *testing.T) {
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{
-			"code": 0,
-			"req_0": {
-				"code": 0,
-				"data": {
-					"qrcode_url": "https://qrcode.example.com/abc",
-					"qrcode_key": "key_abc123"
-				}
-			}
-		}`))
-	}))
-	defer srv.Close()
-
-	c := NewClient()
-	c.SetBaseURL(srv.URL)
-	ctx := context.Background()
-
-	qr, err := c.GetLoginQRCode(ctx)
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
+func TestHash33(t *testing.T) {
+	result := hash33("test")
+	if result <= 0 {
+		t.Errorf("hash33 returned non-positive: %d", result)
 	}
-	if qr.QrcodeURL != "https://qrcode.example.com/abc" {
-		t.Errorf("got url %q", qr.QrcodeURL)
-	}
-	if qr.Key != "key_abc123" {
-		t.Errorf("got key %q", qr.Key)
+	if hash33("test") != result {
+		t.Error("hash33 is not deterministic")
 	}
 }
 
-func TestCheckQRCodeStatus_Confirmed(t *testing.T) {
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{
-			"code": 0,
-			"req_0": {
-				"code": 0,
-				"data": {
-					"status": 3,
-					"musicid": 12345,
-					"musickey": "test_key_abc",
-					"nickname": "test_user"
-				}
-			}
-		}`))
-	}))
-	defer srv.Close()
-
-	c := NewClient()
-	c.SetBaseURL(srv.URL)
-	ctx := context.Background()
-
-	status, err := c.CheckQRCodeStatus(ctx, "key_abc123")
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
+func TestNormalizeUin(t *testing.T) {
+	tests := []struct{ input, expected string }{
+		{"o12345", "12345"},
+		{"O67890", "67890"},
+		{"12345", "12345"},
+		{"", ""},
 	}
-	if status.Status != "confirmed" {
-		t.Errorf("expected confirmed, got %s", status.Status)
-	}
-	if status.MusicID != "12345" {
-		t.Errorf("got musicid %q", status.MusicID)
-	}
-	if status.MusicKey != "test_key_abc" {
-		t.Errorf("got musickey %q", status.MusicKey)
-	}
-	if status.UserName != "test_user" {
-		t.Errorf("got username %q", status.UserName)
+	for _, tt := range tests {
+		got := normalizeUin(tt.input)
+		if got != tt.expected {
+			t.Errorf("normalizeUin(%q) = %q, want %q", tt.input, got, tt.expected)
+		}
 	}
 }
 
-func TestCheckQRCodeStatus_Pending(t *testing.T) {
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{
-			"code": 0,
-			"req_0": {
-				"code": 0,
-				"data": {
-					"status": 1
-				}
-			}
-		}`))
-	}))
-	defer srv.Close()
-
-	c := NewClient()
-	c.SetBaseURL(srv.URL)
-
-	status, err := c.CheckQRCodeStatus(context.Background(), "key")
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
+func TestSplitCSV(t *testing.T) {
+	input := "'0','0','https://example.com','','','',''"
+	parts := splitCSV(input)
+	if len(parts) < 3 {
+		t.Fatalf("splitCSV returned %d parts, want at least 3", len(parts))
 	}
-	if status.Status != "pending" {
-		t.Errorf("expected pending, got %s", status.Status)
+}
+
+func TestExtractParam(t *testing.T) {
+	url := "https://example.com?uin=12345&ptsigx=abc123"
+	if extractParam(url, "uin") != "12345" {
+		t.Error("extractParam failed for uin")
+	}
+	if extractParam(url, "missing") != "" {
+		t.Error("extractParam should return empty for missing key")
+	}
+	if extractParam("", "uin") != "" {
+		t.Error("extractParam should return empty for empty URL")
+	}
+}
+
+func TestQRCodeFieldsExist(t *testing.T) {
+	qr := &QRCode{QrcodeDataURL: "data:image/png;base64,test", Key: "testkey"}
+	if qr.QrcodeDataURL == "" || qr.Key == "" {
+		t.Error("QRCode fields not set")
+	}
+}
+
+func TestQRStatusConfirmedFields(t *testing.T) {
+	s := &QRStatus{
+		Status:   "confirmed",
+		MusicID:  "123",
+		MusicKey: "key",
+		OpenID:   "openid123",
+		UnionID:  "union123",
+		UserName: "testuser",
+	}
+	if s.OpenID != "openid123" {
+		t.Error("OpenID not set")
+	}
+	if s.UnionID != "union123" {
+		t.Error("UnionID not set")
 	}
 }

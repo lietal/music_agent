@@ -115,3 +115,40 @@ func Login(ctx context.Context, db *pgxpool.Pool, username, password string) (*U
 	}
 	return &UserInfo{UserID: userID, DisplayName: displayName}, nil
 }
+
+func FindOrCreateByProvider(ctx context.Context, db *pgxpool.Pool, provider, providerID, displayName, avatarURL string) (*UserInfo, error) {
+	if db == nil {
+		return nil, fmt.Errorf("database not available")
+	}
+
+	// Try to find existing user
+	var userID, dn, av string
+	err := db.QueryRow(ctx,
+		`SELECT id, display_name, avatar_url FROM users WHERE oauth_provider = $1 AND oauth_id = $2`,
+		provider, providerID,
+	).Scan(&userID, &dn, &av)
+
+	if err == nil {
+		// Update last login
+		db.Exec(ctx, `UPDATE users SET last_login_at = now() WHERE id = $1`, userID)
+		if displayName != "" && dn == "" {
+			dn = displayName
+		}
+		if avatarURL != "" && av == "" {
+			av = avatarURL
+		}
+		return &UserInfo{UserID: userID, Provider: provider, ProviderID: providerID, DisplayName: dn, AvatarURL: av}, nil
+	}
+
+	// Create new user
+	err = db.QueryRow(ctx,
+		`INSERT INTO users (oauth_provider, oauth_id, display_name, avatar_url)
+		 VALUES ($1, $2, $3, $4) RETURNING id`,
+		provider, providerID, displayName, avatarURL,
+	).Scan(&userID)
+	if err != nil {
+		return nil, fmt.Errorf("create user by provider: %w", err)
+	}
+
+	return &UserInfo{UserID: userID, Provider: provider, ProviderID: providerID, DisplayName: displayName, AvatarURL: avatarURL}, nil
+}

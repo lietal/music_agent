@@ -1,0 +1,16 @@
+- generic [ref=e4]:
+  - heading "Music Agent" [level=1] [ref=e5]
+  - paragraph [ref=e6]: 你的音乐AI助手
+  - generic [ref=e7]:
+    - textbox "用户名" [ref=e8]: demo
+    - textbox "密码" [ref=e9]: demo123
+    - textbox "显示名称（可选）" [ref=e18]
+    - paragraph [ref=e17]: 用户名或密码错误
+    - button "注册" [ref=e19]
+  - paragraph [ref=e11]:
+    - text: 已有账号？
+    - button "登录" [active] [ref=e20]
+  - separator [ref=e13]
+  - generic [ref=e14]:
+    - heading "QQ 音乐登录" [level=2] [ref=e15]
+    - button "登录 QQ 音乐" [ref=e16]

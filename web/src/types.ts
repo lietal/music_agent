@@ -72,8 +72,15 @@ export interface QRStatusResponse {
   status: 'pending' | 'scanned' | 'confirmed' | 'expired'
   music_id?: string
   music_key?: string
+  openid?: string
   user_name?: string
   avatar_url?: string
+  token?: string
+  user?: {
+    user_id: string
+    provider: string
+    display_name: string
+  }
 }
 
 export interface LoginStatusResponse {

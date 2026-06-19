@@ -4,16 +4,20 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/music-agent/music-agent/internal/auth"
 	"github.com/music-agent/music-agent/internal/tme"
 )
 
 type LoginHandler struct {
-	client *tme.Client
-	creds  *tme.CredentialStore
+	client    *tme.Client
+	creds     *tme.CredentialStore
+	jwtSecret []byte
+	db        *pgxpool.Pool
 }
 
-func NewLoginHandler(client *tme.Client, creds *tme.CredentialStore) *LoginHandler {
-	return &LoginHandler{client: client, creds: creds}
+func NewLoginHandler(client *tme.Client, creds *tme.CredentialStore, jwtSecret []byte, db *pgxpool.Pool) *LoginHandler {
+	return &LoginHandler{client: client, creds: creds, jwtSecret: jwtSecret, db: db}
 }
 
 func (h *LoginHandler) HandleGetQRCode(w http.ResponseWriter, r *http.Request) {
@@ -41,14 +45,28 @@ func (h *LoginHandler) HandleCheckQRStatus(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	if status.Status == "confirmed" {
-		h.creds.Set(status.MusicID, status.MusicKey)
-	}
-
-	writeJSON(w, 200, map[string]any{
+	resp := map[string]any{
 		"status":    status.Status,
 		"user_name": status.UserName,
-	})
+	}
+
+	if status.Status == "confirmed" {
+		h.creds.Set(status.MusicID, status.MusicKey)
+
+		if status.OpenID != "" && h.db != nil {
+			user, err := auth.FindOrCreateByProvider(r.Context(), h.db,
+				"qqmusic", status.OpenID, status.UserName, status.AvatarURL)
+			if err == nil {
+				token, err := auth.GenerateToken(user.UserID, "qqmusic", h.jwtSecret)
+				if err == nil {
+					resp["token"] = token
+					resp["user"] = user
+				}
+			}
+		}
+	}
+
+	writeJSON(w, 200, resp)
 }
 
 func (h *LoginHandler) HandleGetStatus(w http.ResponseWriter, r *http.Request) {

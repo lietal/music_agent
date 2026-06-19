@@ -1,0 +1,21 @@
+[server]
+host = "0.0.0.0"
+port = 8080
+
+[database]
+url = "postgres://music_agent:music_agent@localhost:5432/music_agent?sslmode=disable"
+
+[auth]
+jwt_secret = "dev-secret-change-in-production"
+
+[auth.wechat]
+app_id = ""
+app_secret = ""
+
+[llm]
+provider = "deepseek"
+base_url = "https://api.deepseek.com/v1"
+api_key = "sk-13bc3450f143462db810de59c4e2a39a"
+model = "deepseek-chat"
+max_tokens = 2048
+temperature = 0.7

@@ -1,0 +1,36 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /chat
+      - img [ref=e6]
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /history
+      - img [ref=e9]
+    - link [ref=e13] [cursor=pointer]:
+      - /url: /settings
+      - img [ref=e14]
+    - button [ref=e18]:
+      - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e46]:
+          - paragraph [ref=e50]: 周杰伦
+          - paragraph [ref=e54]: 发现你喜欢周杰伦！🎵 根据搜索结果，为你精选了这几首经典好歌： 1. **《晴天》** - 收录于专辑《叶惠美》，校园情歌的标杆，前奏响起就是满满的青春回忆。 2. **《搁浅》** - 来自《七里香》专辑，KTV必点的催泪神曲，副歌部分的情感爆发力十足。 3. **《七里香》** - 同名专辑主打，夏天的味道，前奏的蝉鸣和风铃声太有画面感了。 4. **《稻香》** - 出自《魔杰座》，温暖治愈，提醒我们“家是唯一的城堡”。 5. **《那天下雨了》** - 一首相对小众但很有意境的歌，带着淡淡的忧伤和故事感。 希望这些歌能陪你度过美好时光！如果想听更多，随时告诉我～ 😊
+        - generic [ref=e31]:
+          - textbox "输入你想听的音乐..." [ref=e32]
+          - button [disabled] [ref=e33]:
+            - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - heading "Trace" [level=3] [ref=e39]
+          - button [ref=e40]:
+            - img [ref=e41]
+        - generic [ref=e44]:
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e60]: Plan
+            - generic [ref=e61]: plan
+          - generic [ref=e63]:
+            - img [ref=e64]
+            - generic [ref=e66]: start

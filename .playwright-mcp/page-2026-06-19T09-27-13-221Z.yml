@@ -1,0 +1,29 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /chat
+      - img [ref=e6]
+    - link [ref=e8] [cursor=pointer]:
+      - /url: /history
+      - img [ref=e9]
+    - link [ref=e13] [cursor=pointer]:
+      - /url: /settings
+      - img [ref=e14]
+    - button [ref=e18]:
+      - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e27]:
+          - heading "Music Agent" [level=2] [ref=e28]
+          - paragraph [ref=e29]: 输入你想听的音乐，开始探索
+        - generic [ref=e31]:
+          - textbox "输入你想听的音乐..." [ref=e32]
+          - button [disabled] [ref=e33]:
+            - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - heading "Trace" [level=3] [ref=e39]
+          - button [ref=e40]:
+            - img [ref=e41]
+        - paragraph [ref=e45]: No trace data yet. Send a message to see agent activity.
