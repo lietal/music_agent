@@ -74,70 +74,42 @@ func (h *Handler) chatEventsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rc := http.NewResponseController(w)
-	if rc == nil {
-		http.Error(w, `{"error":"streaming not supported"}`, http.StatusInternalServerError)
+	rc, err := setupSSE(w)
+	if err != nil {
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
-	w.Header().Set("X-Accel-Buffering", "no")
-	w.WriteHeader(http.StatusOK)
-	rc.Flush()
+	eventCh := h.startAgentEventCh(r.Context(), runID, message)
+	writeSSEEvents(w, rc, r.Context(), eventCh)
+}
 
-	user := auth.UserFromContext(r.Context())
-	userID := ""
-	if user != nil {
-		userID = user.UserID
-	}
-
+func (h *Handler) startAgentEventCh(ctx context.Context, runID, message string) <-chan event.Event {
 	state := agent.LoopState{
 		RunID:         runID,
-		UserID:        userID,
+		UserID:        "",
 		Goal:          tool.AgentGoal{Intent: message, TaskType: "chat"},
 		MaxSteps:      3,
 		ExecutedCalls: make(map[string]bool),
 	}
 
-	ctx, cancel := context.WithCancel(r.Context())
-	defer cancel()
-
-	evtCh := h.agent.Run(ctx, state)
-
-	for {
-		select {
-		case <-ctx.Done():
-			return
-		case evt, ok := <-evtCh:
-			if !ok {
-				return
-			}
-
-			fmt.Fprintf(w, "event: %s\ndata: %s\n\n", evt.Type, evt.Data)
-			rc.Flush()
-
-			if evt.Type == event.TypeDone || evt.Type == event.TypeError {
-				return
-			}
-		}
+	if user := auth.UserFromContext(ctx); user != nil {
+		state.UserID = user.UserID
 	}
+
+	agentCtx, cancel := context.WithCancel(ctx)
+	go func() {
+		<-ctx.Done()
+		cancel()
+	}()
+
+	return h.agent.Run(agentCtx, state)
 }
 
 func (h *Handler) fallbackMockSSE(w http.ResponseWriter, r *http.Request, runID string) {
-	rc := http.NewResponseController(w)
-	if rc == nil {
-		http.Error(w, `{"error":"streaming not supported"}`, http.StatusInternalServerError)
+	rc, err := setupSSE(w)
+	if err != nil {
 		return
 	}
-
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
-	w.Header().Set("X-Accel-Buffering", "no")
-	w.WriteHeader(http.StatusOK)
-	rc.Flush()
 
 	ctx, cancel := context.WithCancel(r.Context())
 	defer cancel()
@@ -147,6 +119,26 @@ func (h *Handler) fallbackMockSSE(w http.ResponseWriter, r *http.Request, runID 
 
 	go runMockAgent(ctx, h.bus, runID)
 
+	writeSSEEvents(w, rc, ctx, ch)
+}
+
+func setupSSE(w http.ResponseWriter) (*http.ResponseController, error) {
+	rc := http.NewResponseController(w)
+	if rc == nil {
+		http.Error(w, `{"error":"streaming not supported"}`, http.StatusInternalServerError)
+		return nil, fmt.Errorf("streaming not supported")
+	}
+
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Connection", "keep-alive")
+	w.Header().Set("X-Accel-Buffering", "no")
+	w.WriteHeader(http.StatusOK)
+	rc.Flush()
+	return rc, nil
+}
+
+func writeSSEEvents(w http.ResponseWriter, rc *http.ResponseController, ctx context.Context, ch <-chan event.Event) {
 	for {
 		select {
 		case <-ctx.Done():

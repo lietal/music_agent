@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"sync"
 
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -8,13 +9,17 @@ import (
 	"github.com/music-agent/music-agent/internal/event"
 )
 
+type AgentRunner interface {
+	Run(ctx context.Context, state agent.LoopState) <-chan event.Event
+}
+
 type Handler struct {
-	bus       *event.Bus
-	jwtSecret []byte
-	db        *pgxpool.Pool
-	agent     *agent.AgentLoop
+	bus        *event.Bus
+	jwtSecret  []byte
+	db         *pgxpool.Pool
+	agent      AgentRunner
 	activeRuns map[string]string
-	mu        sync.RWMutex
+	mu         sync.RWMutex
 }
 
 func NewHandler(bus *event.Bus, jwtSecret []byte, db *pgxpool.Pool) *Handler {
@@ -26,7 +31,7 @@ func NewHandler(bus *event.Bus, jwtSecret []byte, db *pgxpool.Pool) *Handler {
 	}
 }
 
-func (h *Handler) SetAgent(a *agent.AgentLoop) {
+func (h *Handler) SetAgent(a AgentRunner) {
 	h.agent = a
 }
 

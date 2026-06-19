@@ -171,3 +171,46 @@ func TestCheckPasswordInvalidHash(t *testing.T) {
 		t.Error("CheckPassword should return false for invalid hash")
 	}
 }
+
+func TestRegisterLoginMemFallback(t *testing.T) {
+	ctx := context.Background()
+
+	user, err := Register(ctx, nil, "memuser", "mempass", "Mem User")
+	if err != nil {
+		t.Fatal("memRegister failed:", err)
+	}
+	if user.UserID == "" {
+		t.Error("expected non-empty user ID")
+	}
+
+	user2, err := Login(ctx, nil, "memuser", "mempass")
+	if err != nil {
+		t.Fatal("memLogin failed:", err)
+	}
+	if user2.DisplayName != "Mem User" {
+		t.Errorf("got %s", user2.DisplayName)
+	}
+
+	_, err = Login(ctx, nil, "memuser", "wrong")
+	if err == nil {
+		t.Error("expected error for wrong password")
+	}
+}
+
+func TestGenerateToken(t *testing.T) {
+	token, err := GenerateToken("test-user", "password", []byte("test-secret"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if token == "" {
+		t.Error("expected non-empty token")
+	}
+
+	claims, err := ValidateToken(token, []byte("test-secret"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if claims.UserID != "test-user" {
+		t.Errorf("got %s", claims.UserID)
+	}
+}

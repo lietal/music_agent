@@ -18,7 +18,7 @@ func dbURL() string {
 
 func newTestPool(t *testing.T) *pgxpool.Pool {
 	t.Helper()
-	pool, err := pgxpool.New(context.Background(), dbURL())
+	pool, err := NewPool(context.Background(), dbURL(), DefaultPoolConfig())
 	if err != nil {
 		t.Skipf("skipping integration test: cannot connect: %v", err)
 	}
@@ -62,7 +62,11 @@ func TestRunMigrations(t *testing.T) {
 	before := existingTables(t, pool)
 	for _, tbl := range expectedTables {
 		if contains(before, tbl) {
-			t.Fatalf("table %s already exists before migration", tbl)
+			t.Logf("table %s already exists, running down migration first", tbl)
+			if err := RunDownMigrations(context.Background(), dbURL()); err != nil {
+				t.Fatalf("RunDownMigrations (cleanup): %v", err)
+			}
+			break
 		}
 	}
 
