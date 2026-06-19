@@ -17,9 +17,10 @@ const photoDomain = "https://y.gtimg.cn/music/photo_new/"
 const photoSizeSegment = "T002R300x300M000"
 
 type Client struct {
-	baseURL    string
-	httpClient *http.Client
-	comm       CommParams
+	baseURL      string
+	loginBaseURL string
+	httpClient   *http.Client
+	comm         CommParams
 }
 
 func NewClient() *Client {
@@ -41,6 +42,10 @@ func (c *Client) SetCredential(musicid, musickey string) {
 
 func (c *Client) SetBaseURL(url string) {
 	c.baseURL = url
+}
+
+func (c *Client) SetLoginBaseURL(url string) {
+	c.loginBaseURL = url
 }
 
 func (c *Client) Call(ctx context.Context, reqs map[string]MusicuSubRequest) (*MusicuResponse, error) {

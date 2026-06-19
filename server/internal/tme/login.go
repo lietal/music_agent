@@ -15,6 +15,20 @@ import (
 	"time"
 )
 
+func (c *Client) ptloginURL() string {
+	if c.loginBaseURL != "" {
+		return c.loginBaseURL
+	}
+	return "https://ssl.ptlogin2.qq.com"
+}
+
+func (c *Client) graphURL() string {
+	if c.loginBaseURL != "" {
+		return c.loginBaseURL
+	}
+	return "https://ssl.ptlogin2.graph.qq.com"
+}
+
 const (
 	qqAppID       = "716027609"
 	qqMusicAppID  = "100497308"
@@ -59,8 +73,8 @@ func (c *Client) GetLoginQRCode(ctx context.Context) (*QRCode, error) {
 	client := &http.Client{Jar: jar, Timeout: 30 * time.Second}
 
 	reqURL := fmt.Sprintf(
-		"https://ssl.ptlogin2.qq.com/ptqrshow?appid=%s&e=2&l=M&s=3&d=72&v=4&t=%s&daid=%s&pt_3rd_aid=%s",
-		qqAppID, "0.1", qqDaid, qqMusicAppID,
+		"%s/ptqrshow?appid=%s&e=2&l=M&s=3&d=72&v=4&t=%s&daid=%s&pt_3rd_aid=%s",
+		c.ptloginURL(), qqAppID, "0.1", qqDaid, qqMusicAppID,
 	)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", reqURL, nil)
@@ -142,8 +156,8 @@ func (c *Client) pollQRLogin(ctx context.Context, client *http.Client, qrsig str
 	ts := strconv.FormatInt(time.Now().UnixMilli(), 10)
 
 	reqURL := fmt.Sprintf(
-		"https://ssl.ptlogin2.qq.com/ptqrlogin?u1=%s&ptqrtoken=%d&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-%s&js_ver=20102616&js_type=1&pt_uistyle=40&aid=%s&daid=%s&pt_3rd_aid=%s&has_onekey=1",
-		url.QueryEscape("https://graph.qq.com/oauth2.0/login_jump"), token, ts, qqAppID, qqDaid, qqMusicAppID,
+		"%s/ptqrlogin?u1=%s&ptqrtoken=%d&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-%s&js_ver=20102616&js_type=1&pt_uistyle=40&aid=%s&daid=%s&pt_3rd_aid=%s&has_onekey=1",
+		c.ptloginURL(), url.QueryEscape("https://graph.qq.com/oauth2.0/login_jump"), token, ts, qqAppID, qqDaid, qqMusicAppID,
 	)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", reqURL, nil)
@@ -221,7 +235,7 @@ func (c *Client) checkSig(ctx context.Context, client *http.Client, session *log
 	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET",
-		"https://ssl.ptlogin2.graph.qq.com/check_sig?"+v.Encode(), nil)
+		c.graphURL()+"/check_sig?"+v.Encode(), nil)
 	if err != nil {
 		return "", fmt.Errorf("create check_sig request: %w", err)
 	}
