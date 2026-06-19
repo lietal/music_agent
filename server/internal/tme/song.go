@@ -167,7 +167,7 @@ func (c *Client) GetRelatedPlaylists(ctx context.Context, songID string, limit i
 }
 
 func extractMID(id string) string {
-	prefixes := []string{"qqmusic:", "qqmusic:track:", "qqmusic:song:"}
+	prefixes := []string{"qqmusic:track:", "qqmusic:song:", "qqmusic:artist:", "qqmusic:album:", "qqmusic:playlist:", "qqmusic:chart:", "qqmusic:"}
 	for _, p := range prefixes {
 		if len(id) > len(p) && id[:len(p)] == p {
 			return id[len(p):]
