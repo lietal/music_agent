@@ -1,17 +1,23 @@
 import { Loader, Check } from 'lucide-react'
-import type { ChatMessage, TraceStep } from '../types'
+import type { ChatMessage, TraceStep, Song } from '../types'
 import SongCards from './SongCards'
 
 interface AgentMessageListProps {
   messages: ChatMessage[]
   isStreaming: boolean
   traceSteps: TraceStep[]
+  onPlaySong?: (song: Song) => void
+  onAddToQueue?: (song: Song) => void
+  currentSongId?: string | null
 }
 
 export default function AgentMessageList({
   messages,
   isStreaming,
   traceSteps,
+  onPlaySong,
+  onAddToQueue,
+  currentSongId,
 }: AgentMessageListProps) {
   if (messages.length === 0) {
     return (
@@ -44,7 +50,12 @@ export default function AgentMessageList({
                     )}
                   </p>
                   {msg.songs && msg.songs.length > 0 && (
-                    <SongCards songs={msg.songs} />
+                    <SongCards
+                      songs={msg.songs}
+                      onPlay={onPlaySong}
+                      onAddToQueue={onAddToQueue}
+                      currentSongId={currentSongId}
+                    />
                   )}
                 </div>
               </div>

@@ -3,9 +3,12 @@ import { useSearchParams } from 'react-router-dom'
 import { Send } from 'lucide-react'
 import { api } from '../api/client'
 import { useSSE } from '../hooks/useSSE'
+import { usePlayerStore } from '../hooks/usePlayerStore'
 import type { ChatMessage } from '../types'
 import AgentMessageList from '../components/AgentMessageList'
 import TracePanel from '../components/TracePanel'
+import PlayerBar from '../components/PlayerBar'
+import PlayerPanel from '../components/PlayerPanel'
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -21,6 +24,19 @@ export default function ChatPage() {
     traceSteps,
     start,
   } = useSSE()
+
+  const {
+    state,
+    play,
+    togglePlay,
+    next,
+    prev,
+    seek,
+    setVolume,
+    addToQueue,
+    removeFromQueue,
+    togglePanel,
+  } = usePlayerStore()
 
   useEffect(() => {
     if (!conversationId) return
@@ -92,7 +108,7 @@ export default function ChatPage() {
   return (
     <div className="flex h-full">
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="flex-1 overflow-auto p-4">
+        <div className="flex-1 overflow-auto p-4 pb-14">
           {loadingHistory ? (
             <div className="flex items-center justify-center h-full">
               <p className="text-gray-500">加载中...</p>
@@ -112,13 +128,16 @@ export default function ChatPage() {
                 messages={messages}
                 isStreaming={isStreaming}
                 traceSteps={traceSteps}
+                onPlaySong={play}
+                onAddToQueue={addToQueue}
+                currentSongId={state.currentSong?.id ?? null}
               />
               <div ref={messagesEndRef} />
             </>
           )}
         </div>
 
-        <div className="border-t border-gray-800 p-4">
+        <div className="border-t border-gray-800 p-4 pb-14">
           <div className="flex gap-2 max-w-3xl mx-auto">
             <input
               type="text"
@@ -141,6 +160,38 @@ export default function ChatPage() {
       </div>
 
       <TracePanel steps={traceSteps} />
+
+      {state.panelOpen && (
+        <PlayerPanel
+          currentSong={state.currentSong}
+          isPlaying={state.isPlaying}
+          currentTime={state.currentTime}
+          duration={state.duration}
+          volume={state.volume}
+          lyrics={state.lyrics}
+          activeLyricIndex={state.activeLyricIndex}
+          queue={state.queue}
+          queueIndex={state.queueIndex}
+          onTogglePlay={togglePlay}
+          onPrev={prev}
+          onNext={next}
+          onSeek={seek}
+          onVolumeChange={setVolume}
+          onPlaySong={play}
+          onRemoveFromQueue={removeFromQueue}
+          onClose={togglePanel}
+        />
+      )}
+
+      <PlayerBar
+        currentSong={state.currentSong}
+        isPlaying={state.isPlaying}
+        currentTime={state.currentTime}
+        duration={state.duration}
+        onTogglePlay={togglePlay}
+        onTogglePanel={togglePanel}
+        onNext={next}
+      />
     </div>
   )
 }
