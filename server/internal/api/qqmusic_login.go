@@ -23,7 +23,7 @@ func (h *LoginHandler) HandleGetQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, 200, map[string]any{
-		"qrcode_url": qr.QrcodeURL,
+		"qrcode_url": qr.QrcodeDataURL,
 		"key":        qr.Key,
 	})
 }
