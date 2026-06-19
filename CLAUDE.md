@@ -6,6 +6,29 @@
 
 This is non-negotiable. Any PR, commit, or refactor that drops coverage below 80% MUST be accompanied by additional tests.
 
+## ⛔ Test Database Isolation (HARD GATE)
+
+**Tests that touch the database MUST use `music_agent_test`, NEVER `music_agent`.**
+
+Production data must survive test runs. Every test that connects to PostgreSQL must use a dedicated test database.
+
+```go
+// ✅ CORRECT: test database
+func testDBURL() string {
+    return "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent_test?sslmode=disable"
+}
+
+// ❌ WRONG: production database (will DELETE user data!)
+func testDBURL() string {
+    return "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent?sslmode=disable"
+}
+```
+
+**Create the test database once:**
+```bash
+docker exec music-agent-db psql -U music_agent -c "CREATE DATABASE music_agent_test;"
+```
+
 ### Backend (Go)
 
 ```bash
