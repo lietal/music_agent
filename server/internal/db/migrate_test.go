@@ -10,10 +10,10 @@ import (
 )
 
 func dbURL() string {
-	if u := os.Getenv("DATABASE_URL"); u != "" {
+	if u := os.Getenv("TEST_DATABASE_URL"); u != "" {
 		return u
 	}
-	return "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent?sslmode=disable"
+	return "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent_test?sslmode=disable"
 }
 
 func newTestPool(t *testing.T) *pgxpool.Pool {
