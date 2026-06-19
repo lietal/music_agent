@@ -11,9 +11,9 @@ import (
 )
 
 func testDBURL() string {
-	u := os.Getenv("DATABASE_URL")
+	u := os.Getenv("TEST_DATABASE_URL")
 	if u == "" {
-		u = "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent?sslmode=disable"
+		u = "postgres://music_agent:music_agent@127.0.0.1:5432/music_agent_test?sslmode=disable"
 	}
 	return u
 }
