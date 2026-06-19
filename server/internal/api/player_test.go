@@ -143,3 +143,33 @@ func TestGetPlayURL_TMEError(t *testing.T) {
 		t.Errorf("expected 500, got %d", w.Code)
 	}
 }
+
+func TestGetLyrics_Error(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(500)
+	}))
+	defer srv.Close()
+
+	c := tme.NewClient()
+	c.SetBaseURL(srv.URL)
+	ph := NewPlayerHandler(c, tme.NewCredentialStore())
+
+	req := httptest.NewRequest("GET", "/api/player/lyrics/qqmusic:bad", nil)
+	w := httptest.NewRecorder()
+	ph.HandleGetLyrics(w, req)
+
+	if w.Code != 500 {
+		t.Errorf("expected 500, got %d", w.Code)
+	}
+}
+
+func TestGetLyrics_MissingSongID(t *testing.T) {
+	ph := NewPlayerHandler(tme.NewClient(), tme.NewCredentialStore())
+	req := httptest.NewRequest("GET", "/api/player/lyrics/", nil)
+	w := httptest.NewRecorder()
+	ph.HandleGetLyrics(w, req)
+
+	if w.Code != 400 {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}

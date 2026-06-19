@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/music-agent/music-agent/internal/tme"
@@ -36,6 +37,9 @@ func TestGetQRCode_ReturnsDataURL(t *testing.T) {
 }
 
 func TestCheckQRStatus_Pending(t *testing.T) {
+	if os.Getenv("E2E_TEST") == "" {
+		t.Skip("skipping: requires E2E_TEST=1 (calls ptlogin2.qq.com)")
+	}
 	h := NewLoginHandler(tme.NewClient(), tme.NewCredentialStore(), []byte("test"), nil)
 
 	req := httptest.NewRequest("GET", "/api/qqmusic/login/status/invalid_key", nil)

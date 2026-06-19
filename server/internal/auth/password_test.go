@@ -33,11 +33,24 @@ func newTestPool(t *testing.T) *pgxpool.Pool {
 		t.Skipf("skipping test: cannot ping postgres: %v", err)
 	}
 
-	_, err = pool.Exec(ctx, `DELETE FROM users`)
+	_, err = pool.Exec(ctx, `CREATE TABLE IF NOT EXISTS users (
+		id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+		oauth_provider TEXT NOT NULL DEFAULT '',
+		oauth_id TEXT UNIQUE,
+		display_name TEXT NOT NULL DEFAULT '',
+		avatar_url TEXT NOT NULL DEFAULT '',
+		created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+		last_login_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+		password_hash TEXT NOT NULL DEFAULT '',
+		username TEXT UNIQUE
+	)`)
 	if err != nil {
-		t.Skipf("skipping test: cannot clean users table: %v", err)
+		t.Skipf("skipping test: cannot create users table: %v", err)
 	}
 
+	// Clean all test data before each test, fix migration state
+	pool.Exec(ctx, `DELETE FROM users`)
+	pool.Exec(ctx, `UPDATE schema_migrations SET dirty = false WHERE dirty = true`)
 	return pool
 }
 
@@ -212,5 +225,53 @@ func TestGenerateToken(t *testing.T) {
 	}
 	if claims.UserID != "test-user" {
 		t.Errorf("got %s", claims.UserID)
+	}
+}
+
+func TestFindOrCreateByProvider_Create(t *testing.T) {
+	pool := newTestPool(t)
+	ctx := context.Background()
+
+	user, err := FindOrCreateByProvider(ctx, pool, "qqmusic_test", "openid_create", "Test User", "")
+	if err != nil {
+		t.Fatalf("FindOrCreateByProvider: %v", err)
+	}
+	if user.UserID == "" {
+		t.Error("expected non-empty UserID")
+	}
+	if user.Provider != "qqmusic_test" {
+		t.Errorf("got provider %q", user.Provider)
+	}
+	if user.DisplayName != "Test User" {
+		t.Errorf("got display name %q", user.DisplayName)
+	}
+
+	// Cleanup
+	pool.Exec(ctx, `DELETE FROM users WHERE oauth_provider = 'qqmusic_test' AND oauth_id = 'openid_create'`)
+}
+
+func TestFindOrCreateByProvider_Existing(t *testing.T) {
+	pool := newTestPool(t)
+	ctx := context.Background()
+
+	// First call creates
+	user1, _ := FindOrCreateByProvider(ctx, pool, "qqmusic_test", "openid_existing", "First Login", "")
+	// Second call should find existing
+	user2, err := FindOrCreateByProvider(ctx, pool, "qqmusic_test", "openid_existing", "Second Login", "http://avatar.url")
+	if err != nil {
+		t.Fatalf("FindOrCreateByProvider (second): %v", err)
+	}
+	if user2.UserID != user1.UserID {
+		t.Errorf("expected same user ID, got %s vs %s", user2.UserID, user1.UserID)
+	}
+
+	// Cleanup
+	pool.Exec(ctx, `DELETE FROM users WHERE oauth_provider = 'qqmusic_test' AND oauth_id = 'openid_existing'`)
+}
+
+func TestFindOrCreateByProvider_NilDB(t *testing.T) {
+	_, err := FindOrCreateByProvider(context.Background(), nil, "qqmusic", "openid", "Name", "")
+	if err == nil {
+		t.Error("expected error for nil db")
 	}
 }
