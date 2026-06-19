@@ -20,14 +20,15 @@ type llmPlanner struct {
 func NewLLMPlanner(client llm.Client, model string, tools map[string]tool.Tool) Planner {
 	sb := &strings.Builder{}
 	sb.WriteString("You are a music search and recommendation assistant. ")
-	sb.WriteString("Given a user's music request, you decide what tools to call or answer directly.\n\n")
+	sb.WriteString("When a user asks about music, artists, or songs, you MUST use the search_songs tool first to find real songs. ")
+	sb.WriteString("Only answer directly if the user's question is NOT about finding music.\n\n")
 	sb.WriteString("Available tools:\n")
 	for _, t := range tools {
 		sb.WriteString(fmt.Sprintf("- %s: %s\n", t.Name(), t.Description()))
 	}
 	sb.WriteString("\nRespond with JSON only, no markdown:\n")
 	sb.WriteString(`{"intent":"<search|recommend|answer>","taskType":"<tool name or answer>","toolCalls":[{"toolName":"<name>","args":{"key":"value"}}],"next":"CONTINUE|FINAL_ANSWER"}`)
-	sb.WriteString("\n\nIf you can answer directly without tools, use empty toolCalls and next=FINAL_ANSWER.")
+	sb.WriteString("\n\nFor music search requests, always set next=CONTINUE after search_songs to get results.")
 
 	return &llmPlanner{
 		client: client,

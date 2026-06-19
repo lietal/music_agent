@@ -72,6 +72,27 @@ export function useSSE() {
           m.id === agentMsgId ? { ...m, songs } : m
         ))
       }
+      // Also extract songs from tool result data (backend nests songs in result.data as JSON string)
+      const resultData = data.result?.data || data.Result?.data
+      if (resultData) {
+        try {
+          const parsed = JSON.parse(resultData)
+          let rawSongs = Array.isArray(parsed) ? parsed : parsed?.songs || parsed?.output?.songs
+          if (Array.isArray(rawSongs) && rawSongs.length > 0) {
+            const songs = rawSongs.map((s: any) => ({
+              id: s.id || '',
+              title: s.title || '',
+              artist: s.artist || (Array.isArray(s.artists) ? s.artists[0] : '') || '',
+              album: s.album || '',
+              coverUrl: s.coverUrl || s.artwork_url || s.cover_url || '',
+              durationSeconds: s.durationSeconds || s.duration_seconds,
+            }))
+            setMessages((prev: ChatMessage[]) => prev.map((m: ChatMessage) =>
+              m.id === agentMsgId ? { ...m, songs } : m
+            ))
+          }
+        } catch { /* not JSON, ignore */ }
+      }
     })
 
     es.addEventListener('delta', (e) => {
