@@ -12,7 +12,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
 
-  const { loginStatus, qrcodeUrl, userName, isLoggedIn, startLogin, checkStatus, logout } = useQQMusicLogin()
+  const { loginStatus, qrcodeUrl, userName, errorMsg, isLoggedIn, startLogin, checkStatus, logout } = useQQMusicLogin()
 
   useEffect(() => {
     if (loginStatus !== 'pending_scan' && loginStatus !== 'scanned') return
@@ -165,7 +165,7 @@ export default function LoginPage() {
 
           {loginStatus === 'error' && (
             <div className="space-y-2">
-              <p className="text-red-400 text-sm text-center">获取二维码失败</p>
+              <p className="text-red-400 text-sm text-center">{errorMsg || '获取二维码失败'}</p>
               <button
                 onClick={startLogin}
                 className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 text-sm"

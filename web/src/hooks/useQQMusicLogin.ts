@@ -9,15 +9,19 @@ export function useQQMusicLogin() {
   const [userName, setUserName] = useState<string | null>(null)
   const qrKeyRef = useRef<string | null>(null)
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
   const startLogin = useCallback(async () => {
     setLoginStatus('loading')
+    setErrorMsg(null)
     try {
       const qr = await getLoginQRCode()
       setQrcodeUrl(qr.qrcode_url)
       qrKeyRef.current = qr.key
       setLoginStatus('pending_scan')
-    } catch {
+    } catch (e: any) {
       setLoginStatus('error')
+      setErrorMsg(e?.message || '获取二维码失败')
     }
   }, [])
 
@@ -51,6 +55,7 @@ export function useQQMusicLogin() {
     loginStatus,
     qrcodeUrl,
     userName,
+    errorMsg,
     isLoggedIn: loginStatus === 'confirmed',
     startLogin,
     checkStatus,
