@@ -4,12 +4,50 @@
   "session_ids": [
     "ses_12b5937fdffeLojd6lNv7JvqZ8",
     "ses_12a019ed5ffeGZb4c9wFs20fUs",
-    "ses_12a017d13ffejd3Id5AsJdYkGi"
+    "ses_12a017d13ffejd3Id5AsJdYkGi",
+    "ses_129fbb5efffevS5Zbdd4UL2APg",
+    "ses_129fb9d2effd4A2DQCNAiY1e7B",
+    "ses_129fb882cffepXu5yhTT90mfCG",
+    "ses_129f6b4fcffddL8H1YYGsSiq2p",
+    "ses_129f14aeaffe50W3r3s00enT7E",
+    "ses_129f12d0affe9eu2mEE5ujMhuR",
+    "ses_129e9eed4ffe5HccH9vM1s3VHd",
+    "ses_129e5a3b6ffe45nBDIiZGNTd0m",
+    "ses_129e592cdffezZ6e46AQI68sMD",
+    "ses_129e58b78ffdypHBi3vWFcGfhv",
+    "ses_129df4e23ffeJpVYmcGL6Hz6Oy",
+    "ses_129df44c5ffeJSpC2V2K5wr1jn",
+    "ses_129df3965ffe7iryLQTu81qo1N",
+    "ses_129dbdc9affddY4ug9bdF6sPU9",
+    "ses_129dbd188ffeTCHQeQPQ4Is7x8",
+    "ses_129dbc7aeffdRhZ5rxTkPFYzFI",
+    "ses_1272970d7ffed2z1dO7aPG5Amy",
+    "ses_126fe5fcfffeavDA81CF3e5bXO",
+    "ses_1265f7be9ffel8BtTwfn1auvGf"
   ],
   "session_origins": {
     "ses_12b5937fdffeLojd6lNv7JvqZ8": "direct",
     "ses_12a019ed5ffeGZb4c9wFs20fUs": "appended",
-    "ses_12a017d13ffejd3Id5AsJdYkGi": "appended"
+    "ses_12a017d13ffejd3Id5AsJdYkGi": "appended",
+    "ses_129fbb5efffevS5Zbdd4UL2APg": "appended",
+    "ses_129fb9d2effd4A2DQCNAiY1e7B": "appended",
+    "ses_129fb882cffepXu5yhTT90mfCG": "appended",
+    "ses_129f6b4fcffddL8H1YYGsSiq2p": "appended",
+    "ses_129f14aeaffe50W3r3s00enT7E": "appended",
+    "ses_129f12d0affe9eu2mEE5ujMhuR": "appended",
+    "ses_129e9eed4ffe5HccH9vM1s3VHd": "appended",
+    "ses_129e5a3b6ffe45nBDIiZGNTd0m": "appended",
+    "ses_129e592cdffezZ6e46AQI68sMD": "appended",
+    "ses_129e58b78ffdypHBi3vWFcGfhv": "appended",
+    "ses_129df4e23ffeJpVYmcGL6Hz6Oy": "appended",
+    "ses_129df44c5ffeJSpC2V2K5wr1jn": "appended",
+    "ses_129df3965ffe7iryLQTu81qo1N": "appended",
+    "ses_129dbdc9affddY4ug9bdF6sPU9": "appended",
+    "ses_129dbd188ffeTCHQeQPQ4Is7x8": "appended",
+    "ses_129dbc7aeffdRhZ5rxTkPFYzFI": "appended",
+    "ses_1272970d7ffed2z1dO7aPG5Amy": "appended",
+    "ses_126fe5fcfffeavDA81CF3e5bXO": "appended",
+    "ses_1265f7be9ffel8BtTwfn1auvGf": "appended"
   },
   "plan_name": "music-agent",
   "agent": "atlas",
@@ -20,7 +58,63 @@
       "task_title": "项目骨架（go.mod + chi + Docker Compose + Makefile）",
       "session_id": "ses_12a017d13ffejd3Id5AsJdYkGi",
       "agent": "build",
-      "updated_at": "2026-06-17T14:31:27.327Z"
+      "updated_at": "2026-06-17T14:36:54.502Z"
+    },
+    "todo:4": {
+      "task_key": "todo:4",
+      "task_label": "4",
+      "task_title": "OAuth2 认证（Provider 接口 + 微信 + JWT 中间件）",
+      "session_id": "ses_129fb882cffepXu5yhTT90mfCG",
+      "agent": "build",
+      "updated_at": "2026-06-17T14:42:20.181Z"
+    },
+    "todo:7": {
+      "task_key": "todo:7",
+      "task_label": "7",
+      "task_title": "Agent Loop（Planner + Executor + ReAct 循环）",
+      "session_id": "ses_129f6b4fcffddL8H1YYGsSiq2p",
+      "agent": "build",
+      "updated_at": "2026-06-17T14:48:38.526Z"
+    },
+    "todo:8": {
+      "task_key": "todo:8",
+      "task_label": "8",
+      "task_title": "SSE 事件系统（EventBus + SSE handler + heartbeat）",
+      "session_id": "ses_129f12d0affe9eu2mEE5ujMhuR",
+      "agent": "build",
+      "updated_at": "2026-06-17T14:49:16.394Z"
+    },
+    "todo:10": {
+      "task_key": "todo:10",
+      "task_label": "10",
+      "task_title": "React 骨架（Vite + Tailwind + Router + 布局）",
+      "session_id": "ses_129e9eed4ffe5HccH9vM1s3VHd",
+      "agent": "build",
+      "updated_at": "2026-06-17T14:58:57.877Z"
+    },
+    "todo:11": {
+      "task_key": "todo:11",
+      "task_label": "11",
+      "task_title": "登录页 + 认证 hook",
+      "session_id": "ses_129e58b78ffdypHBi3vWFcGfhv",
+      "agent": "build",
+      "updated_at": "2026-06-17T15:01:58.661Z"
+    },
+    "todo:14": {
+      "task_key": "todo:14",
+      "task_label": "14",
+      "task_title": "端到端集成测试",
+      "session_id": "ses_129df3965ffe7iryLQTu81qo1N",
+      "agent": "build",
+      "updated_at": "2026-06-17T15:08:52.883Z"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "**Plan Compliance Audit** — `oracle`",
+      "session_id": "ses_129dbdc9affddY4ug9bdF6sPU9",
+      "agent": "oracle",
+      "updated_at": "2026-06-17T15:12:45.216Z"
     }
   }
 }

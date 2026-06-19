@@ -66,9 +66,10 @@ export function useSSE() {
             : s
         )
       })
-      if (data.output?.songs) {
+      if (data.songs || data.output?.songs) {
+        const songs = data.songs || data.output.songs
         setMessages((prev: ChatMessage[]) => prev.map((m: ChatMessage) =>
-          m.id === agentMsgId ? { ...m, songs: data.output.songs } : m
+          m.id === agentMsgId ? { ...m, songs } : m
         ))
       }
     })
@@ -76,7 +77,7 @@ export function useSSE() {
     es.addEventListener('delta', (e) => {
       const data = JSON.parse((e as MessageEvent).data)
       setMessages((prev: ChatMessage[]) => prev.map((m: ChatMessage) =>
-        m.id === agentMsgId ? { ...m, content: m.content + data.text } : m
+        m.id === agentMsgId ? { ...m, content: m.content + (data.text || data.message || '') } : m
       ))
     })
 

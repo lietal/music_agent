@@ -9,21 +9,21 @@ test: test-backend
 	@echo "All tests passed"
 
 test-backend:
-	go test ./...
+	cd server && go test ./...
 
 build: build-backend build-frontend
 
 build-backend:
-	go build -o bin/server ./cmd/server
+	cd server && go build -o ../bin/server ./cmd/server
 
 build-frontend:
 	cd web && npm ci && npm run build
 
 lint: lint-backend
-	golangci-lint run ./...
+	cd server && golangci-lint run ./...
 
 lint-backend:
-	golangci-lint run ./...
+	cd server && golangci-lint run ./...
 
 clean:
 	docker compose down -v
