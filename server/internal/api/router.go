@@ -33,3 +33,12 @@ func NewRouter(h *Handler) chi.Router {
 
 	return r
 }
+
+func SetupPlayerRoutes(r chi.Router, ph *PlayerHandler, sh *StreamHandler, lh *LoginHandler) {
+	r.Get("/api/player/url/*", ph.HandleGetPlayURL)
+	r.Get("/api/player/stream/*", sh.HandleStream)
+	r.Get("/api/player/lyrics/*", ph.HandleGetLyrics)
+	r.Post("/api/qqmusic/login/qrcode", lh.HandleGetQRCode)
+	r.Get("/api/qqmusic/login/status", lh.HandleGetStatus)
+	r.Get("/api/qqmusic/login/status/*", lh.HandleCheckQRStatus)
+}

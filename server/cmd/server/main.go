@@ -15,6 +15,7 @@ import (
 	"github.com/music-agent/music-agent/internal/db"
 	"github.com/music-agent/music-agent/internal/event"
 	"github.com/music-agent/music-agent/internal/llm"
+	"github.com/music-agent/music-agent/internal/tme"
 	"github.com/music-agent/music-agent/internal/tool"
 )
 
@@ -107,6 +108,18 @@ func main() {
 	}
 
 	r := api.NewRouter(handler)
+
+	// Player and QQ Music login routes
+	tmeClient := tme.NewClient()
+	credStore := tme.NewCredentialStore()
+	if credStore.IsLoggedIn() {
+		mid, mk := credStore.Get()
+		tmeClient.SetCredential(mid, mk)
+	}
+	playerH := api.NewPlayerHandler(tmeClient, credStore)
+	streamH := api.NewStreamHandler(tmeClient)
+	loginH := api.NewLoginHandler(tmeClient, credStore)
+	api.SetupPlayerRoutes(r, playerH, streamH, loginH)
 
 	srv := &http.Server{
 		Addr:         ":8080",
