@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { api, setToken } from '../api/client'
+import { useQQMusicLogin } from '../hooks/useQQMusicLogin'
 
 export default function LoginPage() {
   const [isRegister, setIsRegister] = useState(false)
@@ -10,6 +11,16 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+
+  const { loginStatus, qrcodeUrl, userName, isLoggedIn, startLogin, checkStatus, logout } = useQQMusicLogin()
+
+  useEffect(() => {
+    if (loginStatus !== 'pending_scan' && loginStatus !== 'scanned') return
+    const interval = setInterval(() => {
+      checkStatus()
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [loginStatus, checkStatus])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -94,6 +105,76 @@ export default function LoginPage() {
             </>
           )}
         </p>
+
+        <hr className="my-6 border-gray-700" />
+
+        <div className="text-left">
+          <h2 className="text-lg font-semibold text-white mb-3">QQ 音乐登录</h2>
+
+          {loginStatus === 'idle' && (
+            <button
+              onClick={startLogin}
+              className="w-full px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 text-lg"
+            >
+              登录 QQ 音乐
+            </button>
+          )}
+
+          {loginStatus === 'loading' && (
+            <p className="text-gray-400 text-sm">加载中...</p>
+          )}
+
+          {(loginStatus === 'pending_scan' || loginStatus === 'scanned') && qrcodeUrl && (
+            <div className="space-y-3">
+              <img
+                src={qrcodeUrl}
+                alt="QQ 音乐登录二维码"
+                className="mx-auto w-48 h-48 rounded-lg border border-gray-700 bg-white p-2"
+              />
+              <p className="text-gray-400 text-sm text-center">
+                {loginStatus === 'pending_scan' ? '请用QQ音乐App扫描二维码' : '已扫码，确认中...'}
+              </p>
+            </div>
+          )}
+
+          {loginStatus === 'confirmed' && (
+            <div className="space-y-3">
+              <p className="text-green-400 text-sm flex items-center justify-center gap-1">
+                <span>&#10003;</span> 已登录: {userName}
+              </p>
+              <button
+                onClick={logout}
+                className="w-full px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 text-sm"
+              >
+                登出
+              </button>
+            </div>
+          )}
+
+          {loginStatus === 'expired' && (
+            <div className="space-y-2">
+              <p className="text-yellow-400 text-sm text-center">二维码已过期</p>
+              <button
+                onClick={startLogin}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 text-sm"
+              >
+                重新获取
+              </button>
+            </div>
+          )}
+
+          {loginStatus === 'error' && (
+            <div className="space-y-2">
+              <p className="text-red-400 text-sm text-center">获取二维码失败</p>
+              <button
+                onClick={startLogin}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 text-sm"
+              >
+                重试
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
