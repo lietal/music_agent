@@ -16,14 +16,7 @@ jobs:
 
       - name: Login to TCR
         run: |
-          echo "USERNAME len=${#TCR_U} first=${TCR_U:0:3}"
-          echo "PASSWORD len=${#TCR_P} first=${TCR_P:0:3}"
-          echo "NAMESPACE len=${#TCR_NS} first=${TCR_NS:0:3}"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
-        env:
-          TCR_U: ${{ secrets.TCR_USERNAME }}
-          TCR_P: ${{ secrets.TCR_PASSWORD }}
-          TCR_NS: ${{ secrets.TCR_NAMESPACE }}
 
       - name: Build backend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:latest -f server/Dockerfile ./server
@@ -40,14 +33,7 @@ jobs:
 
       - name: Login to TCR
         run: |
-          echo "USERNAME len=${#TCR_U} first=${TCR_U:0:3}"
-          echo "PASSWORD len=${#TCR_P} first=${TCR_P:0:3}"
-          echo "NAMESPACE len=${#TCR_NS} first=${TCR_NS:0:3}"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
-        env:
-          TCR_U: ${{ secrets.TCR_USERNAME }}
-          TCR_P: ${{ secrets.TCR_PASSWORD }}
-          TCR_NS: ${{ secrets.TCR_NAMESPACE }}
 
       - name: Build frontend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:latest -f web/Dockerfile ./web
