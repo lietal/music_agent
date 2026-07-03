@@ -16,9 +16,9 @@ jobs:
 
       - name: Login to TCR
         run: |
-          echo "USERNAME len: ${#TCR_U}"
-          echo "PASSWORD len: ${#TCR_P}"
-          echo "NAMESPACE: $TCR_NS"
+          echo "USERNAME len=${#TCR_U} first=${TCR_U:0:3} last=${TCR_U: -3}"
+          echo "PASSWORD len=${#TCR_P} first=${TCR_P:0:3} last=${TCR_P: -3}"
+          echo "NAMESPACE=[$TCR_NS] len=${#TCR_NS}"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
         env:
           TCR_U: ${{ secrets.TCR_USERNAME }}
@@ -40,9 +40,9 @@ jobs:
 
       - name: Login to TCR
         run: |
-          echo "USERNAME len: ${#TCR_U}"
-          echo "PASSWORD len: ${#TCR_P}"
-          echo "NAMESPACE: $TCR_NS"
+          echo "USERNAME len=${#TCR_U} first=${TCR_U:0:3} last=${TCR_U: -3}"
+          echo "PASSWORD len=${#TCR_P} first=${TCR_P:0:3} last=${TCR_P: -3}"
+          echo "NAMESPACE=[$TCR_NS] len=${#TCR_NS}"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
         env:
           TCR_U: ${{ secrets.TCR_USERNAME }}
