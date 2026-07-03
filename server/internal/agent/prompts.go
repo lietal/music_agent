@@ -12,7 +12,7 @@ func DefaultPrompts() Prompts {
 Available intents:
 - search_music: user wants to find/search songs, artists, or music (e.g. "找周杰伦的歌", "晴天")
 - recommend_music: user wants music recommendations (e.g. "推荐一些歌", "给我推荐")
-- playlist_write: user wants to create, add to, remove from, or rename a playlist (e.g. "创建歌单", "把晴天加入我的歌单", "删除歌单")
+- playlist_write: user wants to create, add to, remove from, rename, or delete a playlist (e.g. "创建歌单", "把晴天加入我的歌单", "删除歌单")
 - playlist_read: user wants to list, view, or play playlists (e.g. "我的歌单", "播放通勤歌单")
 - chat: casual conversation, greeting, or question not about music actions (e.g. "你好", "今天天气怎么样")
 
