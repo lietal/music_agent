@@ -16,7 +16,14 @@ jobs:
 
       - name: Login to TCR
         run: |
+          echo "USERNAME len: ${#TCR_U}"
+          echo "PASSWORD len: ${#TCR_P}"
+          echo "NAMESPACE: $TCR_NS"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
+        env:
+          TCR_U: ${{ secrets.TCR_USERNAME }}
+          TCR_P: ${{ secrets.TCR_PASSWORD }}
+          TCR_NS: ${{ secrets.TCR_NAMESPACE }}
 
       - name: Build backend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:latest -f server/Dockerfile ./server
@@ -33,7 +40,14 @@ jobs:
 
       - name: Login to TCR
         run: |
+          echo "USERNAME len: ${#TCR_U}"
+          echo "PASSWORD len: ${#TCR_P}"
+          echo "NAMESPACE: $TCR_NS"
           docker login -u ${{ secrets.TCR_USERNAME }} -p "${{ secrets.TCR_PASSWORD }}" ccr.ccs.tencentyun.com
+        env:
+          TCR_U: ${{ secrets.TCR_USERNAME }}
+          TCR_P: ${{ secrets.TCR_PASSWORD }}
+          TCR_NS: ${{ secrets.TCR_NAMESPACE }}
 
       - name: Build frontend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:latest -f web/Dockerfile ./web
