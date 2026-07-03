@@ -10,6 +10,7 @@ type Event struct {
 
 const (
 	TypePlan      = "plan"
+	TypeStep      = "step"
 	TypeToolStart = "tool_start"
 	TypeToolDone  = "tool_done"
 	TypeDelta     = "delta"

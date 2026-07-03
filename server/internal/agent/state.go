@@ -1,12 +1,16 @@
 package agent
 
-import "github.com/music-agent/music-agent/internal/tool"
+import (
+	"github.com/music-agent/music-agent/internal/llm"
+	"github.com/music-agent/music-agent/internal/tool"
+)
 
 type LoopState struct {
 	RunID            string
 	UserID           string
 	Goal             tool.AgentGoal
 	Observations     []tool.Observation
+	MessageHistory   []llm.Message
 	ExecutedCalls    map[string]bool
 	RequiredOutcomes []string
 	MaxSteps         int

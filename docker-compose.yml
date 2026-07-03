@@ -1,6 +1,7 @@
 services:
   postgres:
-    image: postgres:16-alpine
+    build:
+      context: ./db
     container_name: music-agent-db
     restart: unless-stopped
     environment:
@@ -19,8 +20,7 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./server
     container_name: music-agent-backend
     restart: unless-stopped
     ports:

@@ -8,6 +8,7 @@ import (
 )
 
 func (h *Handler) authRegisterHandler(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
 	var req struct {
 		Username    string `json:"username"`
 		Password    string `json:"password"`
@@ -23,7 +24,7 @@ func (h *Handler) authRegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := auth.Register(r.Context(), h.db, req.Username, req.Password, req.DisplayName)
+	user, err := auth.Register(ctx, h.db, req.Username, req.Password, req.DisplayName)
 	if err != nil {
 		http.Error(w, `{"error":"username already taken or invalid"}`, http.StatusConflict)
 		return
@@ -43,6 +44,7 @@ func (h *Handler) authRegisterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) authLoginHandler(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
 	var req struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -57,7 +59,7 @@ func (h *Handler) authLoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := auth.Login(r.Context(), h.db, req.Username, req.Password)
+	user, err := auth.Login(ctx, h.db, req.Username, req.Password)
 	if err != nil {
 		http.Error(w, `{"error":"invalid username or password"}`, http.StatusUnauthorized)
 		return
@@ -77,7 +79,8 @@ func (h *Handler) authLoginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) authMeHandler(w http.ResponseWriter, r *http.Request) {
-	user := auth.UserFromContext(r.Context())
+	ctx := r.Context()
+	user := auth.UserFromContext(ctx)
 	if user == nil {
 		http.Error(w, `{"error":"unauthorized"}`, http.StatusUnauthorized)
 		return

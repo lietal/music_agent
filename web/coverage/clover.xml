@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1781995435119" clover="3.2.0">
+  <project timestamp="1781995435119" name="All files">
+    <metrics statements="496" coveredstatements="425" conditionals="373" coveredconditionals="224" methods="194" coveredmethods="147" elements="1063" coveredelements="796" complexity="0" loc="496" ncloc="496" packages="5" files="21" classes="21"/>
+    <package name="src">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="App.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/App.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.api">
+      <metrics statements="35" coveredstatements="34" conditionals="18" coveredconditionals="12" methods="19" coveredmethods="18"/>
+      <file name="client.ts" path="/Users/as/code/music_searchrecom_agent/web/src/api/client.ts">
+        <metrics statements="18" coveredstatements="17" conditionals="8" coveredconditionals="6" methods="13" coveredmethods="12"/>
+        <line num="9" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="12" count="35" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="24" count="14" type="stmt"/>
+        <line num="25" count="14" type="stmt"/>
+        <line num="33" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="11" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+      </file>
+      <file name="player.ts" path="/Users/as/code/music_searchrecom_agent/web/src/api/player.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="10" coveredconditionals="6" methods="6" coveredmethods="6"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="92" coveredstatements="71" conditionals="119" coveredconditionals="73" methods="48" coveredmethods="34"/>
+      <file name="AgentMessageList.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/AgentMessageList.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="17" coveredconditionals="17" methods="4" coveredmethods="4"/>
+        <line num="22" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="33" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+      </file>
+      <file name="CommentsPanel.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/CommentsPanel.tsx">
+        <metrics statements="15" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="Layout.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/Layout.tsx">
+        <metrics statements="12" coveredstatements="10" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="4"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="1" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="LyricsPanel.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/LyricsPanel.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+        <line num="11" count="7" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="17" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="28" count="15" type="stmt"/>
+        <line num="29" count="15" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+      </file>
+      <file name="NowPlaying.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/NowPlaying.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="10" coveredconditionals="9" methods="4" coveredmethods="4"/>
+        <line num="18" count="24" type="stmt"/>
+        <line num="19" count="24" type="stmt"/>
+        <line num="20" count="24" type="stmt"/>
+        <line num="35" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="43" count="12" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+      </file>
+      <file name="PlayerBar.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/PlayerBar.tsx">
+        <metrics statements="12" coveredstatements="11" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="4"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="31" count="14" type="stmt"/>
+        <line num="32" count="14" type="stmt"/>
+        <line num="33" count="14" type="stmt"/>
+        <line num="40" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="7" type="stmt"/>
+        <line num="44" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="18" type="stmt"/>
+        <line num="57" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+      </file>
+      <file name="PlayerPanel.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/PlayerPanel.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="12" coveredconditionals="9" methods="3" coveredmethods="3"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="44" count="24" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+      </file>
+      <file name="QueuePanel.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/QueuePanel.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+        <line num="14" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="26" count="11" type="stmt"/>
+        <line num="27" count="11" type="stmt"/>
+        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+      </file>
+      <file name="SongCards.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/SongCards.tsx">
+        <metrics statements="6" coveredstatements="5" conditionals="6" coveredconditionals="4" methods="5" coveredmethods="4"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+      </file>
+      <file name="TracePanel.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/components/TracePanel.tsx">
+        <metrics statements="10" coveredstatements="8" conditionals="22" coveredconditionals="9" methods="7" coveredmethods="3"/>
+        <line num="6" count="15" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
+        <line num="9" count="15" type="stmt"/>
+        <line num="11" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="23" count="14" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="src.hooks">
+      <metrics statements="289" coveredstatements="252" conditionals="143" coveredconditionals="68" methods="92" coveredmethods="70"/>
+      <file name="useAuth.ts" path="/Users/as/code/music_searchrecom_agent/web/src/hooks/useAuth.ts">
+        <metrics statements="33" coveredstatements="32" conditionals="12" coveredconditionals="12" methods="7" coveredmethods="7"/>
+        <line num="6" count="18" type="stmt"/>
+        <line num="7" count="18" type="stmt"/>
+        <line num="9" count="18" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="18" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="18" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="18" type="stmt"/>
+        <line num="27" count="14" type="stmt"/>
+        <line num="28" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="39" count="78" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="44" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="54" count="18" type="stmt"/>
+        <line num="55" count="17" type="cond" truecount="4" falsecount="0"/>
+        <line num="56" count="8" type="stmt"/>
+        <line num="60" count="18" type="stmt"/>
+      </file>
+      <file name="usePlayerStore.ts" path="/Users/as/code/music_searchrecom_agent/web/src/hooks/usePlayerStore.ts">
+        <metrics statements="128" coveredstatements="102" conditionals="54" coveredconditionals="21" methods="53" coveredmethods="35"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="25" count="18" type="stmt"/>
+        <line num="26" count="18" type="stmt"/>
+        <line num="27" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="14" type="stmt"/>
+        <line num="35" count="38" type="stmt"/>
+        <line num="36" count="38" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="49" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="74" count="5" type="stmt"/>
+        <line num="75" count="5" type="stmt"/>
+        <line num="76" count="10" type="stmt"/>
+        <line num="77" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="10" type="stmt"/>
+        <line num="79" count="10" type="stmt"/>
+        <line num="80" count="10" type="stmt"/>
+        <line num="81" count="10" type="stmt"/>
+        <line num="87" count="5" type="stmt"/>
+        <line num="91" count="48" type="stmt"/>
+        <line num="95" count="48" type="stmt"/>
+        <line num="97" count="48" type="stmt"/>
+        <line num="98" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="99" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="100" count="18" type="stmt"/>
+        <line num="101" count="18" type="stmt"/>
+        <line num="103" count="18" type="stmt"/>
+        <line num="105" count="18" type="stmt"/>
+        <line num="106" count="18" type="cond" truecount="0" falsecount="2"/>
+        <line num="107" count="18" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="111" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="119" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="124" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="130" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="135" count="18" type="stmt"/>
+        <line num="136" count="18" type="stmt"/>
+        <line num="138" count="18" type="stmt"/>
+        <line num="139" count="18" type="stmt"/>
+        <line num="140" count="18" type="stmt"/>
+        <line num="141" count="18" type="stmt"/>
+        <line num="142" count="18" type="stmt"/>
+        <line num="144" count="18" type="stmt"/>
+        <line num="145" count="18" type="stmt"/>
+        <line num="146" count="18" type="stmt"/>
+        <line num="147" count="18" type="stmt"/>
+        <line num="148" count="18" type="stmt"/>
+        <line num="149" count="18" type="stmt"/>
+        <line num="153" count="48" type="stmt"/>
+        <line num="154" count="38" type="stmt"/>
+        <line num="157" count="48" type="stmt"/>
+        <line num="158" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="160" count="7" type="stmt"/>
+        <line num="161" count="7" type="stmt"/>
+        <line num="163" count="7" type="stmt"/>
+        <line num="164" count="7" type="stmt"/>
+        <line num="166" count="7" type="stmt"/>
+        <line num="169" count="8" type="stmt"/>
+        <line num="177" count="7" type="stmt"/>
+        <line num="178" count="7" type="stmt"/>
+        <line num="182" count="48" type="stmt"/>
+        <line num="183" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="184" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="191" count="48" type="stmt"/>
+        <line num="192" count="1" type="stmt"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="194" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="195" count="1" type="stmt"/>
+        <line num="196" count="1" type="stmt"/>
+        <line num="197" count="1" type="stmt"/>
+        <line num="201" count="48" type="stmt"/>
+        <line num="202" count="1" type="stmt"/>
+        <line num="203" count="1" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
+        <line num="205" count="1" type="stmt"/>
+        <line num="206" count="1" type="stmt"/>
+        <line num="210" count="48" type="stmt"/>
+        <line num="211" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
+        <line num="217" count="48" type="stmt"/>
+        <line num="218" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="219" count="1" type="stmt"/>
+        <line num="222" count="48" type="stmt"/>
+        <line num="223" count="10" type="stmt"/>
+        <line num="225" count="5" type="stmt"/>
+        <line num="229" count="48" type="stmt"/>
+        <line num="230" count="1" type="stmt"/>
+        <line num="231" count="1" type="stmt"/>
+        <line num="232" count="1" type="stmt"/>
+        <line num="233" count="1" type="stmt"/>
+        <line num="237" count="48" type="stmt"/>
+        <line num="238" count="1" type="stmt"/>
+        <line num="241" count="48" type="stmt"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="245" count="48" type="stmt"/>
+        <line num="246" count="2" type="stmt"/>
+        <line num="249" count="48" type="stmt"/>
+      </file>
+      <file name="useQQMusicLogin.ts" path="/Users/as/code/music_searchrecom_agent/web/src/hooks/useQQMusicLogin.ts">
+        <metrics statements="57" coveredstatements="54" conditionals="20" coveredconditionals="15" methods="6" coveredmethods="6"/>
+        <line num="7" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="26" type="stmt"/>
+        <line num="12" count="26" type="stmt"/>
+        <line num="13" count="26" type="stmt"/>
+        <line num="14" count="26" type="stmt"/>
+        <line num="15" count="26" type="stmt"/>
+        <line num="17" count="26" type="stmt"/>
+        <line num="19" count="26" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+        <line num="39" count="5" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="26" type="stmt"/>
+        <line num="49" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="50" count="6" type="stmt"/>
+        <line num="51" count="6" type="stmt"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="53" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="56" count="3" type="stmt"/>
+        <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="61" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="78" count="26" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="85" count="26" type="stmt"/>
+      </file>
+      <file name="useSSE.ts" path="/Users/as/code/music_searchrecom_agent/web/src/hooks/useSSE.ts">
+        <metrics statements="71" coveredstatements="64" conditionals="57" coveredconditionals="20" methods="26" coveredmethods="22"/>
+        <line num="7" count="31" type="stmt"/>
+        <line num="8" count="31" type="stmt"/>
+        <line num="9" count="31" type="stmt"/>
+        <line num="10" count="31" type="stmt"/>
+        <line num="11" count="31" type="stmt"/>
+        <line num="13" count="31" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="15" count="10" type="stmt"/>
+        <line num="16" count="10" type="stmt"/>
+        <line num="18" count="10" type="stmt"/>
+        <line num="19" count="10" type="stmt"/>
+        <line num="20" count="10" type="stmt"/>
+        <line num="26" count="10" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="29" count="10" type="stmt"/>
+        <line num="30" count="10" type="stmt"/>
+        <line num="32" count="10" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="43" count="10" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="54" count="10" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="70" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="76" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="81" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="98" count="10" type="stmt"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="101" count="2" type="cond" truecount="3" falsecount="2"/>
+        <line num="105" count="10" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="110" count="10" type="stmt"/>
+        <line num="111" count="2" type="stmt"/>
+        <line num="112" count="2" type="stmt"/>
+        <line num="113" count="2" type="stmt"/>
+        <line num="114" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="121" count="2" type="stmt"/>
+        <line num="122" count="2" type="stmt"/>
+        <line num="125" count="10" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="130" count="10" type="stmt"/>
+        <line num="133" count="31" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="141" count="31" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages">
+      <metrics statements="79" coveredstatements="67" conditionals="93" coveredconditionals="71" methods="34" coveredmethods="24"/>
+      <file name="ChatPage.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/pages/ChatPage.tsx">
+        <metrics statements="37" coveredstatements="33" conditionals="34" coveredconditionals="22" methods="12" coveredmethods="8"/>
+        <line num="14" count="11" type="stmt"/>
+        <line num="15" count="11" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+        <line num="25" count="11" type="stmt"/>
+        <line num="39" count="11" type="stmt"/>
+        <line num="42" count="11" type="stmt"/>
+        <line num="43" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="52" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="59" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="65" count="11" type="stmt"/>
+        <line num="66" count="10" type="stmt"/>
+        <line num="69" count="11" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="71" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="84" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="85" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="99" count="11" type="stmt"/>
+        <line num="101" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="109" count="11" type="stmt"/>
+        <line num="146" count="2" type="stmt"/>
+      </file>
+      <file name="HistoryPage.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/pages/HistoryPage.tsx">
+        <metrics statements="23" coveredstatements="17" conditionals="27" coveredconditionals="18" methods="13" coveredmethods="8"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="22" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+      </file>
+      <file name="LoginPage.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/pages/LoginPage.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="24" coveredconditionals="23" methods="4" coveredmethods="4"/>
+        <line num="5" count="18" type="stmt"/>
+        <line num="7" count="18" type="stmt"/>
+        <line num="8" count="18" type="cond" truecount="4" falsecount="0"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="15" count="18" type="stmt"/>
+      </file>
+      <file name="SettingsPage.tsx" path="/Users/as/code/music_searchrecom_agent/web/src/pages/SettingsPage.tsx">
+        <metrics statements="12" coveredstatements="10" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="4"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

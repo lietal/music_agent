@@ -12,6 +12,7 @@ import (
 	"github.com/music-agent/music-agent/internal/agent"
 	"github.com/music-agent/music-agent/internal/api"
 	"github.com/music-agent/music-agent/internal/config"
+	"github.com/music-agent/music-agent/internal/crypto"
 	"github.com/music-agent/music-agent/internal/db"
 	"github.com/music-agent/music-agent/internal/event"
 	"github.com/music-agent/music-agent/internal/llm"
@@ -20,7 +21,7 @@ import (
 )
 
 func main() {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logger := slog.New(api.NewContextHandler(slog.NewJSONHandler(os.Stdout, nil)))
 
 	cfg, err := config.Load("config.toml")
 	if err != nil {
@@ -73,7 +74,8 @@ func main() {
 	}
 
 	bus := event.NewBus()
-	handler := api.NewHandler(bus, jwtSecret, pool)
+	handler := api.NewHandler(bus, jwtSecret, pool, logger)
+	handler.SetMaxSteps(5)
 
 	if apiKey != "" && baseURL != "" && model != "" {
 		llmClient := llm.NewOpenAI(baseURL, apiKey, nil)
@@ -96,13 +98,19 @@ func main() {
 			"search_songs":    searchTool,
 			"recommend_songs": tool.NewMockRecommendSongs(),
 		}
+		if pool != nil {
+			for name, t := range tool.NewPlaylistTools(pool) {
+				tools[name] = t
+			}
+		}
 
-		planner := agent.NewLLMPlanner(llmClient, model, tools)
 		executor := agent.NewDefaultExecutor()
-		agentLoop := agent.NewAgentLoop(planner, executor, tools)
+		prompts := agent.DefaultPrompts()
 
-		handler.SetAgent(agentLoop)
-		logger.Info("agent initialized with LLM planner", "model", model)
+		turnPlanner := agent.NewLLMTurnPlanner(llmClient, model, prompts.IntentRouter)
+		pipeline := agent.NewAgentPipeline(turnPlanner, llmClient, model, prompts, tools, executor, 5)
+		handler.SetAgent(pipeline)
+		logger.Info("agent initialized with pipeline", "model", model)
 	} else {
 		logger.Warn("LLM not configured, using mock agent")
 	}
@@ -111,14 +119,21 @@ func main() {
 
 	// Player and QQ Music login routes
 	tmeClient := tme.NewClient()
-	credStore := tme.NewCredentialStore()
+	encryptor := crypto.NewAES(string(jwtSecret))
+	credStore := tme.NewCredentialStoreWithPool(pool, encryptor)
+	credStore.LoadCredentials()
+	handler.SetCredentialStore(credStore)
+	handler.SetTMEClient(tmeClient)
 	if credStore.IsLoggedIn() {
 		mid, mk := credStore.Get()
 		tmeClient.SetCredential(mid, mk)
 	}
 	playerH := api.NewPlayerHandler(tmeClient, credStore)
+	playerH.SetLogger(logger)
 	streamH := api.NewStreamHandler(tmeClient)
+	streamH.SetLogger(logger)
 	loginH := api.NewLoginHandler(tmeClient, credStore, jwtSecret, pool)
+	loginH.SetLogger(logger)
 	api.SetupPlayerRoutes(r, playerH, streamH, loginH)
 
 	srv := &http.Server{

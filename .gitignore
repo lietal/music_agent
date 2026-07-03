@@ -3,3 +3,7 @@
 server/server
 bin/
 *.exe
+data/pg/
+web/coverage/
+doc/
+.env

@@ -23,12 +23,19 @@ func NewRouter(h *Handler) chi.Router {
 
 		r.Get("/api/auth/me", h.authMeHandler)
 
-		r.Post("/api/conversations", createConversationHandler)
-		r.Get("/api/conversations", listConversationsHandler)
-		r.Get("/api/conversations/{id}", getConversationHandler)
+		r.Post("/api/conversations", h.createConversationHandler)
+		r.Get("/api/conversations", h.listConversationsHandler)
+		r.Get("/api/conversations/{id}", h.getConversationHandler)
 
 		r.Post("/api/chat", h.createChatHandler)
 		r.Get("/api/chat/{runId}/events", h.chatEventsHandler)
+
+		r.Post("/api/playlists", h.createPlaylistHandler)
+		r.Get("/api/playlists", h.listPlaylistsHandler)
+		r.Get("/api/playlists/{id}", h.getPlaylistHandler)
+		r.Post("/api/playlists/{id}/songs", h.addToPlaylistHandler)
+		r.Put("/api/playlists/{id}", h.renamePlaylistHandler)
+		r.Delete("/api/playlists/{id}", h.deletePlaylistHandler)
 	})
 
 	return r
