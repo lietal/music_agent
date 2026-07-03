@@ -15,7 +15,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Login to TCR
-        run: echo "${{ secrets.TCR_PASSWORD }}" | docker login $TCR_REGISTRY -u ${{ secrets.TCR_USERNAME }} --password-stdin
+        run: |
+          echo "${{ secrets.TCR_PASSWORD }}" | docker login --username=${{ secrets.TCR_USERNAME }} --password-stdin ccr.ccs.tencentyun.com
 
       - name: Build backend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:latest -f server/Dockerfile ./server
@@ -31,7 +32,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Login to TCR
-        run: echo "${{ secrets.TCR_PASSWORD }}" | docker login $TCR_REGISTRY -u ${{ secrets.TCR_USERNAME }} --password-stdin
+        run: |
+          echo "${{ secrets.TCR_PASSWORD }}" | docker login --username=${{ secrets.TCR_USERNAME }} --password-stdin ccr.ccs.tencentyun.com
 
       - name: Build frontend image
         run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:latest -f web/Dockerfile ./web
