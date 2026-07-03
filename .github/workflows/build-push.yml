@@ -1,0 +1,42 @@
+name: Build and Push to TCR
+
+on:
+  push:
+    branches: [main]
+
+env:
+  TCR_REGISTRY: ccr.ccs.tencentyun.com
+  TCR_NAMESPACE: ${{ secrets.TCR_NAMESPACE }}
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to TCR
+        run: echo "${{ secrets.TCR_PASSWORD }}" | docker login $TCR_REGISTRY -u ${{ secrets.TCR_USERNAME }} --password-stdin
+
+      - name: Build backend image
+        run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:latest -f server/Dockerfile ./server
+
+      - name: Push backend image
+        run: |
+          docker push $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:${{ github.sha }}
+          docker push $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-backend:latest
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to TCR
+        run: echo "${{ secrets.TCR_PASSWORD }}" | docker login $TCR_REGISTRY -u ${{ secrets.TCR_USERNAME }} --password-stdin
+
+      - name: Build frontend image
+        run: docker build -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:${{ github.sha }} -t $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:latest -f web/Dockerfile ./web
+
+      - name: Push frontend image
+        run: |
+          docker push $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:${{ github.sha }}
+          docker push $TCR_REGISTRY/$TCR_NAMESPACE/music-agent-web:latest
